@@ -5,7 +5,7 @@
  </head>
   <body>
    <?php
-    function getWalletDetails(): mixed
+    function getWalletDetails(): stdClass
     {
       $url = 'https://lnbits.satoshibox.de/api/v1/wallet';//API URL
 
