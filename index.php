@@ -27,7 +27,6 @@
 
     function createInvoice(): stdClass
     {
-
       $data = array(
         'out'      => false,
         'amount'    => 5,
@@ -56,7 +55,10 @@
     ?>
 
     <!--<canvas id="qrcode"></canvas>  </body>-->
-    <p> <?php echo createInvoice()->payment_request; ?> </p>
+    <textarea id="invoiceTxt" rows="7" cols="50">
+      <?php echo createInvoice()->payment_request; ?>
+    </textarea>
+
     <p> <?php echo getWalletDetails()->balance/1000; ?> </p>
   </body>
 </html>
