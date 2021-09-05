@@ -66,10 +66,14 @@
 
     <br/>
     <br/>
-
    <!--<p> <?php //echo getWalletDetails()->balance/1000; ?> </p> -->
-    <div id="balance"><?php echo getWalletDetails()->balance/1000; ?> </div>
+   
+   <div id="value">0</div>
 
+    <script>
+    var balance = <?=json_encode(getWalletDetails()->balance/1000)?>; 
+    </script>
+    
     <script language="javascript" type="text/javascript" src="script.js"></script>
 
   </body>

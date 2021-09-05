@@ -33,10 +33,7 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 
-var originalVal = document.getElementById("balance").value;
 
 createQR(document.getElementById('invoiceTxt').value);
-console.log(originalVal);
-
-//animateValue("balance", 1, originalVal, 7000);
-
+console.log(balance);
+animateValue("value", 0, balance, 4000);
