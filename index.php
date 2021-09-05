@@ -2,6 +2,7 @@
 <html>
  <head>
   <title>PHP-Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
  </head>
   <body>
    <?php
@@ -27,7 +28,7 @@
 
     function createInvoice(): stdClass
     {
-      $data = array(
+      $data = array(  // body anpassen
         'out'      => false,
         'amount'    => 5,
         'memo'       => 'Ernold Tusk'
@@ -54,11 +55,22 @@
 
     ?>
 
-    <!--<canvas id="qrcode"></canvas>  </body>-->
+    <canvas id="qrcode"></canvas>  </body>
+
+    <br/>
+    <br/>
+
     <textarea id="invoiceTxt" rows="7" cols="50">
       <?php echo createInvoice()->payment_request; ?>
     </textarea>
 
-    <p> <?php echo getWalletDetails()->balance/1000; ?> </p>
+    <br/>
+    <br/>
+
+   <!--<p> <?php //echo getWalletDetails()->balance/1000; ?> </p> -->
+    <div id="balance"><?php echo getWalletDetails()->balance/1000; ?> </div>
+
+    <script language="javascript" type="text/javascript" src="script.js"></script>
+
   </body>
 </html>
