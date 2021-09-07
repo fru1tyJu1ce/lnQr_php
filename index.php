@@ -8,14 +8,17 @@
    <?php
     function getWalletDetails(): stdClass
     {
-      $url = 'https://lnbits.satoshibox.de/api/v1/wallet';//API URL
+      //$url = 'https://lnbits.satoshibox.de/api/v1/wallet';//API URL
+      $url = 'https://node.coincreek.com/api/v1/wallet';//API URL
 
       $options = array(
           'http' => array(
           'method'  => 'GET',
           'header'=>  "Content-Type: application/json\r\n".
                       "Accept: application/json\r\n".
-                      "X-Api-Key: 38f5cf4f52004b49856518fb0178c40b\r\n" //Invoice Key
+                      //"X-Api-Key: 38f5cf4f52004b49856518fb0178c40b\r\n" //Invoice Key
+                      "X-Api-Key: 192f309f5d49476da6a8540e8320d77e\r\n" //Invoice Key
+
           )
       );
         
@@ -35,15 +38,17 @@
       );
       
 
-      $url = 'https://lnbits.satoshibox.de/api/v1/payments';//API URL
-
+      //$url = 'https://lnbits.satoshibox.de/api/v1/payments';//API URL
+      $url = 'https://node.coincreek.com/api/v1/payments';//API URL
       $options = array(
           'http' => array(
           'method'  => 'POST',
           'content' => json_encode( $data ),
           'header'=>  "Content-Type: application/json\r\n".
                       "Accept: application/json\r\n".
-                      "X-Api-Key: 38f5cf4f52004b49856518fb0178c40b\r\n" //Invoice Key
+                      //"X-Api-Key: 38f5cf4f52004b49856518fb0178c40b\r\n" //Invoice Key
+                      "X-Api-Key: 192f309f5d49476da6a8540e8320d77e\r\n" //Invoice Key
+
           )
       );
         

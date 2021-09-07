@@ -17,6 +17,15 @@ function createQR(qr){
       });
 }
 
+function formatValueAsSatoshi(val){
+    var value = (val).toLocaleString(
+        undefined, // leave undefined to use the visitor's browser 
+                   // locale or a string like 'en-US' to override it.
+        { minimumFractionDigits: 2 }
+      );
+      return value;
+}
+
 function animateValue(id, start, end, duration) {
     if (start === end) return;
     var range = end - start;
@@ -26,7 +35,7 @@ function animateValue(id, start, end, duration) {
     var obj = document.getElementById(id);
     var timer = setInterval(function() {
         current += increment;
-        obj.innerHTML = current;
+        obj.innerHTML = formatValueAsSatoshi(current);
         if (current == end) {
             clearInterval(timer);
         }
@@ -36,4 +45,5 @@ function animateValue(id, start, end, duration) {
 
 createQR(document.getElementById('invoiceTxt').value);
 console.log(balance);
-animateValue("value", 0, balance, 4000);
+animateValue("value", 0, balance, 10); // -->  last value = count speed
+console.log("finish");
