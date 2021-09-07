@@ -3,9 +3,9 @@ function randomN(min, max) {
 } 
 
 function createQR(qr){
-    console.log("creating qr");
+    //console.log("creating qr");
     var qrcode = new QRious({
-        element: document.getElementById("qrcode"),
+        element: document.getElementById("payment_requestQr"),
         background: '#ffffff',
         backgroundAlpha: 1,
         foreground: '#000000',
@@ -20,6 +20,16 @@ function createQR(qr){
 function formatValueAsSatoshi(val){
     var value = (val).toLocaleString('de-DE');
       return value;
+}
+
+function formatValueAsEUR(val){
+
+    var eur = {
+        style: "currency",
+        currency: "EUR"
+      }
+
+    return (val).toLocaleString('de-DE', eur);
 }
 
 function animateValue(id, start, end, duration) {
@@ -38,9 +48,9 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 
-
-createQR(document.getElementById('invoiceTxt').value);
-console.log(balance);
-document.getElementById('value').innerHTML = formatValueAsSatoshi(balance);
+createQR(payment_request);
+document.getElementById('payment_requestTxt').innerHTML = payment_request;
+document.getElementById('balanceSat').innerHTML = formatValueAsSatoshi(balance/1000);
+document.getElementById('balanceEur').innerHTML = formatValueAsEUR(btcInfo.EUR.last*0.00000001*(balance/1000));
 //animateValue("value", 0, balance, 10); // -->  last value = count speed
-console.log("finish");
+//console.log(btcInfo.EUR.last*0.00000001*(balance/1000));

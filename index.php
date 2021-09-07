@@ -6,6 +6,27 @@
  </head>
   <body>
    <?php
+
+function btcInfo(): stdClass
+{
+  //https://www.blockchain.com/api/exchange_rates_api
+  $url = 'https://blockchain.info/ticker';//API URL 4 btc to eur
+
+
+  $options = array(
+      'http' => array(
+      'method'  => 'GET'
+      )
+  );
+    
+  $context  = stream_context_create( $options );
+  $result = file_get_contents( $url, false, $context );
+  $response = json_decode( $result );
+
+  return $response;
+}
+
+
     function getWalletDetails(): stdClass
     {
       //$url = 'https://lnbits.satoshibox.de/api/v1/wallet';//API URL
@@ -60,24 +81,25 @@
 
     ?>
 
-    <canvas id="qrcode"></canvas>  </body>
+    <canvas id="payment_requestQr" readonly="yes"> </canvas> 
 
     <br/>
     <br/>
 
-    <textarea id="invoiceTxt" rows="7" cols="50">
-      <?php echo createInvoice()->payment_request; ?>
-    </textarea>
+    <textarea id="payment_requestTxt" rows="6" cols="50"></textarea>
 
     <br/>
     <br/>
-   <!--<p> <?php //echo getWalletDetails()->balance/1000; ?> </p> -->
+
    
-   <div id="value">0</div>
+   <div id="balanceSat">0</div>
+   <div id="balanceEur">0</div>
 
-    <script>
-    var balance = <?=json_encode(getWalletDetails()->balance/1000)?>; 
-    </script>
+  <script>
+    var btcInfo = <?=json_encode(btcInfo())?>; 
+    var payment_request = <?=json_encode(createInvoice()->payment_request)?>; 
+    var balance = <?=json_encode(getWalletDetails()->balance)?>; 
+  </script>
     
     <script language="javascript" type="text/javascript" src="script.js"></script>
 
