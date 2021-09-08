@@ -84,7 +84,6 @@ function btcInfo(): stdClass
     <canvas id="payment_requestQr" readonly="yes"> </canvas> 
 
     <br/>
-    <br/>
 
     <textarea id="payment_requestTxt" rows="6" cols="50"></textarea>
 
