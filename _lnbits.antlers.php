@@ -81,8 +81,6 @@ function btcInfo(): stdClass
 
 	<textarea id="payment_requestTxt" rows="6" cols="50" style="display:none;"></textarea>
 
-	
-
    
    <h1 style="font-size: 2.8em;margin:10px;"><span id="balanceSat">0</span> sats</h1>
    <div style="padding-bottom: 0px;margin-bottom: 0px;padding-top:0px;" id="balanceEur">0</div>
