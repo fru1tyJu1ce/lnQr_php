@@ -50,6 +50,7 @@ function btcInfo(): stdClass
       return $response;
     }
 
+     
     function createInvoice(): stdClass
     {
       $data = array(  // body anpassen
@@ -79,8 +80,30 @@ function btcInfo(): stdClass
       return $response;
     }
 
+    function getInvoices(): array
+    {
+  
+      //$url = 'https://lnbits.satoshibox.de/api/v1/payments';//API URL
+      $url = 'https://node.coincreek.com/api/v1/payments';//API URL
+      $options = array(
+        'http' => array(
+        'method'  => 'GET',
+        'header'=>  "Content-Type: application/json\r\n".
+              "Accept: application/json\r\n".
+              //"X-Api-Key: 38f5cf4f52004b49856518fb0178c40b\r\n" //Invoice Key
+              "X-Api-Key: 192f309f5d49476da6a8540e8320d77e\r\n" //Invoice Key
+  
+        )
+      );
+      
+      $context  = stream_context_create( $options );
+      $result = file_get_contents( $url, false, $context );
+      $response = json_decode( $result );
+      return $response;
+    }
+    
     ?>
-
+  <!--
     <canvas id="payment_requestQr" readonly="yes"> </canvas> 
 
     <br/>
@@ -91,14 +114,15 @@ function btcInfo(): stdClass
     <br/>
     <br/>
 
-   
+  -->
    <div id="balanceSat">0</div>
    <div id="balanceEur">0</div>
-
+  
   <script>
     var btcInfo = <?=json_encode(btcInfo())?>; 
-    var payment_request = <?=json_encode(createInvoice()->payment_request)?>; 
+    //var payment_request = json_encode(createInvoice()->payment_request); 
     var balance = <?=json_encode(getWalletDetails()->balance)?>; 
+    var invoices = <?=json_encode(getInvoices())?>;
   </script>
     
     <script language="javascript" type="text/javascript" src="script.js"></script>

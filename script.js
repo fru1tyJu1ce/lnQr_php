@@ -1,3 +1,6 @@
+
+
+
 function randomN(min, max) { 
     return Math.random() * (max - min) + min;
 } 
@@ -48,9 +51,51 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 
-createQR(payment_request);
-document.getElementById('payment_requestTxt').innerHTML = payment_request;
-document.getElementById('balanceSat').innerHTML = formatValueAsSatoshi(balance/1000);
+var animationPayments = [];
+
+function getLastPaymentsAsSum(count){
+    var sum = 0;
+    var tmp;
+    for (var i = 0; i < count; i++) {//Generates random + or - 
+        if( randomN(1,4) <=2){
+           tmp = invoices[i][2]*(-1);
+           animationPayments.push(tmp);
+           sum += (tmp);
+        }
+        else {
+           tmp = invoices[i][2];
+           animationPayments.push(tmp);
+           sum += (tmp);
+        }
+        //console.log(sum);
+    }
+    return sum;
+}
+
+var transactions = 20; // transactions count to be used 
+var aniSum = getLastPaymentsAsSum(transactions); // delta sum 4 the count animation rfom last x transactions
+balance += aniSum; // fake balance for the counting animation
+
+document.getElementById('balanceSat').innerHTML = formatValueAsSatoshi(balance/1000); // display fake balance 
+
+
+var cnt = 0;
+console.log(animationPayments);
+
+const interval = setInterval(function() {
+    animateValue('balanceSat',(balance)/1000, (balance + animationPayments[cnt])/1000, 2000);
+    cnt++;
+    if(cnt == transactions){// terminate after x transactions with the original balance restored  
+        clearInterval(interval); 
+    }
+  }, 3500);
+ 
+
+
+//console.log(invoices);
+//createQR(payment_request);
+//document.getElementById('payment_requestTxt').innerHTML = payment_request;
+//document.getElementById('balanceSat').innerHTML = formatValueAsSatoshi(balance/1000);
 document.getElementById('balanceEur').innerHTML = formatValueAsEUR(btcInfo.EUR.last*0.00000001*(balance/1000));
 //animateValue("value", 0, balance, 10); // -->  last value = count speed
-//console.log(btcInfo.EUR.last*0.00000001*(balance/1000));
+//console.log(btcInfo.EUR.last*0.00000001*(balance/1000)); 

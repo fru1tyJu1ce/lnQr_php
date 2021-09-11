@@ -52,8 +52,8 @@ function btcInfo(): stdClass
 	  );
 	  
 
-	  $url = 'https://lnbits.satoshibox.de/api/v1/payments';//API URL
-	  // $url = 'https://node.coincreek.com/api/v1/payments';//API URL
+	  //$url = 'https://lnbits.satoshibox.de/api/v1/payments';//API URL
+	  $url = 'https://node.coincreek.com/api/v1/payments';//API URL
 	  $options = array(
 		  'http' => array(
 		  'method'  => 'POST',
@@ -89,7 +89,7 @@ function btcInfo(): stdClass
 
   <script>
 	var btcInfo = <?=json_encode(btcInfo())?>; 
-	var payment_request = <?=json_encode(createInvoice()->payment_request)?>; 
+	//var payment_request = <?=json_encode(createInvoice()->payment_request)?>; 
 	var balance = <?=json_encode(getWalletDetails()->balance)?>; 
   </script>
 	
